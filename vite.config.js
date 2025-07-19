@@ -15,7 +15,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
   plugins: [tailwindcss(), react()],
-  base: "/E-com-frotend",
+  base: "/E-com-frotend/",
   server: {
     proxy: {
       '/api': {
