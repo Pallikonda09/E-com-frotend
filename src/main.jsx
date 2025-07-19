@@ -1,0 +1,44 @@
+
+
+
+
+// import React from "react";
+// import ReactDOM from "react-dom/client";
+// import App from "./App";
+// import "./index.css"; // Make sure Tailwind styles are here
+// import { CartProvider } from "./context/CartContext"; // ✅ NEW
+// import { WishlistProvider } from "./context/WishlistContext";
+
+// ReactDOM.createRoot(document.getElementById("root")).render(
+//   <React.StrictMode>
+//    < WishlistProvider>
+//     <CartProvider> 
+//       <App/>
+//     </CartProvider>
+//     </WishlistProvider>
+//   </React.StrictMode>
+// );
+
+
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+import "./index.css"; // Tailwind CSS
+
+import { Provider } from "react-redux"; // 🆕 Redux Provider
+import store from "./redux/store";       // 🆕 Your store file
+
+import { CartProvider } from "./context/CartContext";
+
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <Provider store={store}> {/* 🟩 Redux on top */}
+     
+        <CartProvider>
+          <App />
+        </CartProvider>
+    </Provider>
+  </React.StrictMode>
+);
+
