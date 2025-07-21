@@ -204,7 +204,7 @@ function App() {
   };
 
   return (
-    <BrowserRouter basename="/E-com-frotend/">
+    <BrowserRouter>
       <div className="min-h-screen bg-gray-50 flex flex-col">
         {/* ✅ Fixed: Pass onSearchChange function instead of globalSearch and setGlobalSearch */}
         <Navbar onSearchChange={handleSearchChange} />
