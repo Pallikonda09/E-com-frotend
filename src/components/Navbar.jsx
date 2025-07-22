@@ -849,14 +849,7 @@ const Navbar = ({ onSearchChange }) => {
             <div className="lg:hidden pb-4">
               <form onSubmit={handleSearchSubmit}>
                 <div className="flex items-center bg-gray-50 rounded-full px-4 py-3">
-                  {/* <Search className="text-gray-400 mr-3" size={18} />
-                  <input
-                    type="text"
-                    placeholder="Search products..."
-                    value={searchInput}
-                    onChange={handleSearch}
-                    className="bg-transparent outline-none w-full placeholder:text-gray-400 text-gray-700 text-sm"
-                  /> */}
+                
                 </div>
               </form>
             </div>
