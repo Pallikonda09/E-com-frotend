@@ -21,7 +21,7 @@ const ProductDetail = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const res = await axios.get(`/api/products/${id}`);
+        const res = await axios.get(`https://e-com-backend-fxxd.onrender.com/api/products/${id}`);
         setProduct(res.data);
       } catch (err) {
         setError("Product not found.");
