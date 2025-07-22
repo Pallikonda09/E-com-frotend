@@ -1,6 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
+const BACKEND_URL = "https://e-com-backend-fxxd.onrender.com";
+
 // -------------------------------
 // Login Thunk
 // -------------------------------
@@ -8,8 +10,8 @@ export const loginUser = createAsyncThunk(
   "auth/loginUser",
   async (formData, thunkAPI) => {
     try {
-      const res = await axios.post("/api/auth/login", formData); // Backend URL
-      return res.data; // { user, token }
+      const res = await axios.post(`${BACKEND_URL}/api/auth/login`, formData);
+      return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(
         error.response?.data?.message || "Login failed"
@@ -25,8 +27,8 @@ export const signupUser = createAsyncThunk(
   "auth/signupUser",
   async (formData, thunkAPI) => {
     try {
-      const res = await axios.post("/api/auth/signup", formData); // Backend URL
-      return res.data; // { user, token }
+      const res = await axios.post(`${BACKEND_URL}/api/auth/signup`, formData);
+      return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(
         error.response?.data?.message || "Signup failed"
@@ -34,6 +36,41 @@ export const signupUser = createAsyncThunk(
     }
   }
 );
+
+
+// // -------------------------------
+// // Login Thunk
+// // -------------------------------
+// export const loginUser = createAsyncThunk(
+//   "auth/loginUser",
+//   async (formData, thunkAPI) => {
+//     try {
+//       const res = await axios.post("/api/auth/login", formData); // Backend URL
+//       return res.data; // { user, token }
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue(
+//         error.response?.data?.message || "Login failed"
+//       );
+//     }
+//   }
+// );
+
+// // -------------------------------
+// // Signup Thunk
+// // -------------------------------
+// export const signupUser = createAsyncThunk(
+//   "auth/signupUser",
+//   async (formData, thunkAPI) => {
+//     try {
+//       const res = await axios.post("/api/auth/signup", formData); // Backend URL
+//       return res.data; // { user, token }
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue(
+//         error.response?.data?.message || "Signup failed"
+//       );
+//     }
+//   }
+// );
 
 // -------------------------------
 // Initial State
