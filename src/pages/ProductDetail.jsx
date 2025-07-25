@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleWishlist } from "../redux/slices/wishlistSlice";
-import { useCart } from "../context/CartContext";
 import { Star, ShoppingCart, Heart } from "lucide-react";
 
 const ProductDetail = () => {

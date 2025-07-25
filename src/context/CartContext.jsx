@@ -1,4 +1,3 @@
-
 // import { createContext, useContext, useEffect, useState } from "react";
 
 // const CartContext = createContext();
@@ -27,10 +26,10 @@
 //   // Add to cart (with quantity)
 //   const addToCart = (product) => {
 //     setCartItems((prevItems) => {
-//       const existingItem = prevItems.find((item) => item._id === product._id);
+//       const existingItem = prevItems.find((item) => item.id === product.id);
 //       if (existingItem) {
 //         return prevItems.map((item) =>
-//           item._id === product._id
+//           item.id === product.id
 //             ? { ...item, quantity: item.quantity + 1 }
 //             : item
 //         );
@@ -43,7 +42,7 @@
 //   // Remove from cart
 //   const removeFromCart = (productId) => {
 //     setCartItems((prevItems) =>
-//       prevItems.filter((item) => item._id !== productId)
+//       prevItems.filter((item) => item.id !== productId)
 //     );
 //   };
 
@@ -51,9 +50,19 @@
 //   const updateCartItemQuantity = (productId, quantity) => {
 //     setCartItems((prevItems) =>
 //       prevItems.map((item) =>
-//         item._id === productId ? { ...item, quantity } : item
+//         item.id === productId ? { ...item, quantity } : item
 //       )
 //     );
+//   };
+
+//   // Get total price - ADDED MISSING FUNCTION
+//   const getTotalPrice = () => {
+//     return cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
+//   };
+
+//   // Clear cart - ADDED MISSING FUNCTION
+//   const clearCart = () => {
+//     setCartItems([]);
 //   };
 
 //   return (
@@ -63,12 +72,16 @@
 //         addToCart,
 //         removeFromCart,
 //         updateCartItemQuantity,
+//         getTotalPrice,  // Added this
+//         clearCart,      // Added this
 //       }}
 //     >
 //       {children}
 //     </CartContext.Provider>
 //   );
 // };
+
+// src/context/CartContext.js
 
 import { createContext, useContext, useEffect, useState } from "react";
 
@@ -95,13 +108,13 @@ export const CartProvider = ({ children }) => {
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
   }, [cartItems]);
 
-  // Add to cart (with quantity)
+  // ✅ Add to cart
   const addToCart = (product) => {
     setCartItems((prevItems) => {
-      const existingItem = prevItems.find((item) => item.id === product.id);
+      const existingItem = prevItems.find((item) => item._id === product._id);
       if (existingItem) {
         return prevItems.map((item) =>
-          item.id === product.id
+          item._id === product._id
             ? { ...item, quantity: item.quantity + 1 }
             : item
         );
@@ -111,28 +124,31 @@ export const CartProvider = ({ children }) => {
     });
   };
 
-  // Remove from cart
+  // ✅ Remove item
   const removeFromCart = (productId) => {
     setCartItems((prevItems) =>
-      prevItems.filter((item) => item.id !== productId)
+      prevItems.filter((item) => item._id !== productId)
     );
   };
 
-  // Update quantity
+  // ✅ Update quantity
   const updateCartItemQuantity = (productId, quantity) => {
     setCartItems((prevItems) =>
       prevItems.map((item) =>
-        item.id === productId ? { ...item, quantity } : item
+        item._id === productId ? { ...item, quantity } : item
       )
     );
   };
 
-  // Get total price - ADDED MISSING FUNCTION
+  // ✅ Get total price
   const getTotalPrice = () => {
-    return cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
+    return cartItems.reduce(
+      (total, item) => total + item.price * item.quantity,
+      0
+    );
   };
 
-  // Clear cart - ADDED MISSING FUNCTION
+  // ✅ Clear cart
   const clearCart = () => {
     setCartItems([]);
   };
@@ -144,8 +160,8 @@ export const CartProvider = ({ children }) => {
         addToCart,
         removeFromCart,
         updateCartItemQuantity,
-        getTotalPrice,  // Added this
-        clearCart,      // Added this
+        getTotalPrice,
+        clearCart,
       }}
     >
       {children}
